@@ -1,198 +1,101 @@
-# 🎓 CareerConnect – Smart Campus Placement Portal
+# 🎓 CareerConnect – Smart Campus Placement Portal (Version 2.0)
 
 CareerConnect is an integrated **AI-powered platform** designed to streamline and elevate the campus placement experience for **students**, **training and placement officers (TPOs)**, and **recruiters**.
 
-It features advanced modules for **resume building**, **aptitude & technical tests**, **AI-proctored interviews**, and **performance analytics**, making students industry-ready and boosting placement outcomes.
-
-> ⚠️ Note: The repository structure may seem a bit disorganized, but running each component step-by-step as shown below will successfully launch the full project.
-
-[![GitHub license](https://img.shields.io/github/license/xHarshit/CareerConnect-Smart-Campus-Placement-Portal)](https://github.com/xHarshit/CareerConnect-Smart-Campus-Placement-Portal/blob/main/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/xHarshit/CareerConnect-Smart-Campus-Placement-Portal)](https://github.com/xHarshit/CareerConnect-Smart-Campus-Placement-Portal/issues)
-[![GitHub stars](https://img.shields.io/github/stars/xHarshit/CareerConnect-Smart-Campus-Placement-Portal)](https://github.com/xHarshit/CareerConnect-Smart-Campus-Placement-Portal/stargazers)
+Featuring advanced modules for **ATS Analysis**, **AI-Proctored Quizzes**, and **Performance Dashboards**, CareerConnect ensures students are industry-ready while providing TPOs with actionable data.
 
 ---
 
-## 🚀 Features
+## 🚀 Key Modules & AI Features
 
-### 👨‍🎓 Student Portal
+### 👨‍🎓 AI-Powered Student Portal
 
-- **📊 Aptitude Test**  
-  Timed logical reasoning tests with automatic scoring and face recognition-based proctoring.
+- **📊 Smart Quiz System with AI Proctoring**  
+  - Real-time **face recognition** and attention tracking during technical tests.
+  - **Automated Violation Detection**: Captures snapshots of suspicious behavior (looking away, multiple faces, etc.).
+  - **Proctoring Logs**: Detailed history of attempts including webcam snapshots saved securely to Cloudinary.
 
-- **📈 Aptitude Analysis Dashboard**  
-  Topic-wise performance visualizations including accuracy, speed, and strength analysis.
+- **� ATS Resume Scanner 2.0**  
+  - **Groq-Powered Analysis**: High-speed resume matching using Llama 3 models.
+  - **Persistent History Drawer**: Interactive side-panel to review past scans.
+  - **Full State Restoration**: Restores exact **Job Descriptions**, missing keywords, and AI tips from history.
+  - **Cloudinary Integration**: Secure PDF storage and instant viewability.
 
-- **💻 DSA Coding Test**  
-  Real-time coding environment with question tracking and attempt logging.
+- **� Performance Analytics**  
+  - Track quiz scores, DSA progress, and ATS trends with dynamic **Recharts** visualizations.
+  - Individual student growth monitoring across technical and aptitude categories.
 
-- **📉 DSA Performance Dashboard**  
-  Monitor scores, improvement history, and accuracy for each coding attempt.
-
-- **🎙️ AI-Proctored Mock Interviews**  
-  Real-time webcam-based interviews with attention tracking and expression monitoring.
-
-- **🧾 Resume Builder**  
-  Create and download structured, professional resumes.
-
-- **📄 Resume ATS Scoring**  
-  Get resume scores based on ATS keyword compatibility.
-
-- **📢 Announcements**  
-  View placement updates and notifications from TPOs.
-
-- **🙍 Student Profile**  
-  Manage academic/personal info and view individual test/interview performance.
-
----
-
-### 🧑‍🏫 TPO & Company Dashboard
-
-- 📊 Monitor student readiness with analytics  
-- 📋 Post jobs, internships, or announcements  
-- 📈 Export reports on aptitude, coding, and interview performance
+- **💻 DSA & Coding Hub**  
+  - Interactive coding environment with question banks and attempt history.
 
 ---
 
 ## 🧠 Tech Stack
 
-| Layer         | Technologies                                           |
-|---------------|--------------------------------------------------------|
-| **Frontend**  | HTML, CSS, Streamlit                                  |
-| **Backend**   | Node.js, Python                                       |
-| **ML/AI**     | OpenCV, TensorFlow, scikit-learn, face_recognition    |
-| **Database**  | MongoDB                                               |
-
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
-![face_recognition](https://img.shields.io/badge/Face_Recognition-0A192F?style=for-the-badge&logo=python&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+| Layer          | Technologies                                           |
+|----------------|--------------------------------------------------------|
+| **Frontend**   | React 18, Vite, Tailwind CSS, Lucide React, Recharts   |
+| **Backend**    | Node.js, Express.js                                    |
+| **Database**   | MongoDB (Mongoose)                                     |
+| **AI / Cloud** | Groq SDK (Llama 3), Cloudinary (Media), PDF-Parse      |
 
 ---
 
-## 🛡️ AI Face Recognition Proctoring
+## 🛡️ AI Proctoring Features
 
-- Real-time webcam face detection and tracking  
-- Alerts for multiple faces or user looking away  
-- Facial expression analysis during mock interviews  
-
----
-
-## 🖼️ Screenshots
-
-| Screenshot | Description                        |
-|------------|------------------------------------|
-| ![Screenshot 1](screenshots/homepage.png) | 1. Website Homepage                |
-| ![Screenshot 2](screenshots/studentdashboard.png) | 2. Student Dashboard               |
-| ![Screenshot 3](screenshots/aptitudetest.png) | 3. Aptitude Test with Face Recognition |
-| ![Screenshot 4](screenshots/aptitudeanalysis.png) | 4. Aptitude Analysis               |
-| ![Screenshot 5](screenshots/dsatest.png) | 5. Technical Coding Test           |
-| ![Screenshot 6](screenshots/mockinterview.png) | 6. Proctored Mock Interview     |
-| ![Screenshot 7](screenshots/resumebuilder.png) | 7. Resume Builder                  |
-| ![Screenshot 8](screenshots/resumescanner.png) | 8. Resume ATS Result               |
-| ![Screenshot 9](screenshots/admindashboard.png) | 9. Company / Admin Dashboard         |
+- **Continuous Face Tracking**: Uses webcam to ensure the student is focused on the screen.
+- **Environment Analysis**: Detects if multiple people are present during a test.
+- **Snapshot Evidence**: Automatically captures and uploads evidence of violations.
+- **Violation Logging**: TPOs can review logs and snapshots for integrity audits.
 
 ---
 
-## 🛠️ How to Run Locally
+## 🛠️ Installation & Setup
 
 ### Prerequisites
+- [Node.js](https://nodejs.org/) (v16+)
+- [MongoDB](https://www.mongodb.com/try/download/community) (Local or Atlas)
+- [Cloudinary Account](https://cloudinary.com/)
+- [Groq API Key](https://console.groq.com/)
 
-Before running the project, make sure the following are installed and set up on your system:
+### 🤝 Quick Start for Collaborators
+If you are cloning this for the first time:
+1. **Clone the repo**: `git clone https://github.com/Pichikachandu/CareerConnect.git`
+2. **Setup Environment**: Create a `.env` file (see Template below).
+3. **Install Dependencies**: Even if `node_modules` exist, run `npm install` in both root and `client` folders to ensure compatibility.
+4. **Run the App**: Use the "Steps to Run" section below.
 
-- ✅ MongoDB installed and running  
-  → [Download MongoDB](https://www.mongodb.com/try/download/community)
+### Environment Configuration
+Create a `.env` file in the root directory:
 
-- ✅ Node.js installed  
-  → [Download Node.js](https://nodejs.org/en/download/)
-
----
-
-## 🔐 API Configuration
-
-To enable AI-powered features such as interview feedback and resume scoring using Gemini AI, you'll need to set up your Gemini API Key.
-
-1. Get your Gemini API Key:
-   - Visit: https://aistudio.google.com/app/apikey
-   - Sign in with your Google account and generate a new API key.
-
-2. Add the API key to the respective .env files:
-
-📁 MockInter/.env
-📁 ResumeATS/.env
-
-GEMINI_API_KEY=your_api_key_here
-
-⚠️ Make sure to replace your_api_key_here with your actual API key. Do not share this key publicly.
-
-3. Restart the modules (MockInterview & ResumeATS) after setting the environment variables.
-
----
-
-### Steps
-
-1. **Clone the repository**
-
-```bash
-git clone https://github.com/your-username/CareerConnect.git
-cd CareerConnect
+```env
+PORT=3000
+MONGO_URI=your_mongodb_connection_string
+GROQ_API_KEY=your_groq_api_key
+CLOUDINARY_CLOUD_NAME=your_name
+CLOUDINARY_API_KEY=your_key
+CLOUDINARY_API_SECRET=your_secret
 ```
 
-2. **Start the Node.js server**
+### Steps to Run
 
-```bash
-node server.js
-```
+1. **Clone & Install Backend**
+   ```bash
+   npm install
+   ```
 
-3. **Run each Streamlit module in a new terminal:**
+2. **Install Frontend Dependencies**
+   ```bash
+   cd client
+   npm install
+   ```
 
-```bash
-# Aptitude Test
-cd Aptitude
-streamlit run AptiApp.py
-
-# Aptitude Dashboard
-streamlit run InteractiveDashboard.py
-
-# DSA Test
-cd ../CodingPract
-streamlit run DSA_app_db.py
-
-# DSA Dashboard
-streamlit run DSA_dash.py
-
-# Mock Interview
-cd ../MockInter
-streamlit run app.py
-
-# Resume Builder & ATS
-cd ../ResumeATS
-streamlit run app.py
-```
-
-4. **Launch the frontend**
-
-Open `index.html` in a browser.
-
----
-
-## 📈 Future Enhancements
-
-- Add support for regional languages  
-- Gamified tests with leaderboards  
-- Real-time placement drive tracking  
-- Admin dashboard with downloadable reports  
-- SMS/Email notification integration  
-- Mobile-friendly responsive design  
+3. **Start Servers**
+   - **Backend**: `npm start` (from root)
+   - **Frontend**: `npm run dev` (from /client)
 
 ---
 
 ## 🪪 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-

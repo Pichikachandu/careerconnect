@@ -1,0 +1,114 @@
+[
+    {
+        "id": 1,
+        "category": "Technical",
+        "subcategory": "C Programming",
+        "question_text": "Who is known as the father of C Language?",
+        "options": [
+            "Dennis Ritchie",
+            "Bjarne Stroustrup",
+            "James Gosling",
+            "Guido van Rossum"
+        ],
+        "correct_answer": "Dennis Ritchie",
+        "explanation": "Dennis Ritchie created the C programming language at Bell Labs in 1972."
+    },
+    {
+        "id": 2,
+        "category": "Technical",
+        "subcategory": "C Programming",
+        "question_text": "Which of the following cannot be a variable name in C?",
+        "options": [
+            "volatile",
+            "true",
+            "friend",
+            "export"
+        ],
+        "correct_answer": "volatile",
+        "explanation": "'volatile' is a keyword in C, so it cannot be used as a variable name."
+    },
+    {
+        "id": 3,
+        "category": "Technical",
+        "subcategory": "Java Programming",
+        "question_text": "Which component is used to compile, debug and execute the java programs?",
+        "options": [
+            "JRE",
+            "JIT",
+            "JDK",
+            "JVM"
+        ],
+        "correct_answer": "JDK",
+        "explanation": "JDK (Java Development Kit) is a software development environment used for developing Java applications and applets."
+    },
+    {
+        "id": 4,
+        "category": "Technical",
+        "subcategory": "Data Structures",
+        "question_text": "Which data structure is used for Breadth First Search (BFS)?",
+        "options": [
+            "Stack",
+            "Queue",
+            "Tree",
+            "Graph"
+        ],
+        "correct_answer": "Queue",
+        "explanation": "Queue is used for BFS traversal."
+    },
+    {
+        "id": 5,
+        "category": "General",
+        "subcategory": "Logical Reasoning",
+        "question_text": "Look at this series: 2, 1, (1/2), (1/4), ... What number should come next?",
+        "options": [
+            "(1/3)",
+            "(1/8)",
+            "(2/8)",
+            "(1/16)"
+        ],
+        "correct_answer": "(1/8)",
+        "explanation": "This is a simple division series; each number is one-half of the previous number."
+    },
+    {
+        "id": 6,
+        "category": "General",
+        "subcategory": "Verbal Ability",
+        "question_text": "Which word is the odd man out?",
+        "options": [
+            "Trivial",
+            "Unimportant",
+            "Important",
+            "Insignificant"
+        ],
+        "correct_answer": "Important",
+        "explanation": "All other words mean something of little value or importance."
+    },
+    {
+        "id": 7,
+        "category": "General",
+        "subcategory": "Aptitude",
+        "question_text": "A train running at the speed of 60 km/hr crosses a pole in 9 seconds. What is the length of the train?",
+        "options": [
+            "120 metres",
+            "180 metres",
+            "324 metres",
+            "150 metres"
+        ],
+        "correct_answer": "150 metres",
+        "explanation": "Speed = 60 * (5/18) m/sec = 50/3 m/sec. Length = Speed * Time = (50/3) * 9 = 150 metres."
+    },
+    {
+        "id": 8,
+        "category": "Technical",
+        "subcategory": "Web Development",
+        "question_text": "What does CSS stand for?",
+        "options": [
+            "Cascading Style Sheets",
+            "Creative Style System",
+            "Computer Style Sheets",
+            "Colorful Style Sheets"
+        ],
+        "correct_answer": "Cascading Style Sheets",
+        "explanation": "CSS stands for Cascading Style Sheets."
+    }
+]
