@@ -2,16 +2,17 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Webcam from 'react-webcam';
-import { Mic, MicOff, Camera, RefreshCw, ChevronRight, CheckCircle, AlertTriangle, BrainCircuit, Play, StopCircle, Award, Lightbulb, GraduationCap, ArrowLeft, Clock, Monitor, Wifi, Maximize2, Volume2, Shield } from 'lucide-react';
+import { Mic, MicOff, Camera, RefreshCw, ChevronRight, CheckCircle, AlertTriangle, BrainCircuit, Play, StopCircle, Award, Lightbulb, GraduationCap, ArrowLeft, Clock, Monitor, Wifi, Maximize2, Volume2, Shield, Type } from 'lucide-react';
 
 const ActiveInterview = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { jobRole, techStack, experience } = location.state || {};
+    const { jobRole, techStack, experience, scenarioBased = false, topic = '' } = location.state || {};
 
     const [questions, setQuestions] = useState([]);
     const [currentQIndex, setCurrentQIndex] = useState(0);
     const [isRecording, setIsRecording] = useState(false);
+    const [inputMode, setInputMode] = useState('voice'); // 'voice' or 'text'
     const isRecordingRef = useRef(false);
 
     useEffect(() => { isRecordingRef.current = isRecording; }, [isRecording]);
@@ -108,7 +109,11 @@ const ActiveInterview = () => {
         setLoading(true);
         try {
             const res = await axios.post('http://localhost:3000/api/interview/questions', {
-                jobRole, techStack, experience
+                jobRole, 
+                techStack, 
+                experience,
+                scenarioBased,
+                topic: scenarioBased ? topic : undefined
             });
             setQuestions(res.data.questions);
         } catch (err) {
@@ -157,6 +162,7 @@ const ActiveInterview = () => {
     const nextQuestion = () => {
         setFeedback(null);
         setTranscript('');
+        setInputMode('voice'); // Reset to voice mode for next question
         if (currentQIndex < questions.length - 1) {
             setCurrentQIndex(prev => prev + 1);
         } else {
@@ -174,10 +180,14 @@ const ActiveInterview = () => {
                     <BrainCircuit size={24} className="text-indigo-500" />
                 </div>
             </div>
-            <h2 className="text-2xl font-bold mt-6 tracking-tight">Initializing Environment</h2>
+            <h2 className="text-2xl font-bold tracking-tight">Initializing {scenarioBased ? 'Scenario-based ' : ''}Interview</h2>
             <div className="flex items-center gap-2 text-zinc-400 mt-2 text-sm font-medium">
                 <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                Crafting parameters for {jobRole}
+                {scenarioBased ? (
+                    <>Preparing {topic} scenarios for {jobRole} role</>
+                ) : (
+                    <>Crafting technical questions for {jobRole}</>
+                )}
             </div>
         </div>
     );
@@ -335,31 +345,79 @@ const ActiveInterview = () => {
 
                     {/* Interaction Area (Transcript / Result) */}
                     <div className="flex-grow bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden flex flex-col relative shadow-inner">
-                        <div className="flex-1 p-6 md:p-8 overflow-y-auto custom-scrollbar">
+                        <div className="flex-1 p-6 md:p-8 overflow-y-auto custom-scrollbar flex flex-col">
                             {!feedback ? (
                                 <div className="h-full flex flex-col">
-                                    {transcript || interimTranscript ? (
-                                        <div className="space-y-4 animate-in fade-in duration-300">
-                                            <div className="flex gap-4">
-                                                <div className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center shrink-0 mt-1">
-                                                    <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></div>
-                                                </div>
-                                                <div className="space-y-2 max-w-3xl">
-                                                    <p className="text-lg text-zinc-300 leading-relaxed font-light">
-                                                        {transcript} <span className="text-zinc-500">{interimTranscript}</span>
-                                                    </p>
-                                                    {isRecording && <span className="inline-block w-1.5 h-4 bg-indigo-500 animate-pulse ml-1"></span>}
-                                                </div>
-                                            </div>
+                                    {/* Input Mode Toggle */}
+                                    {!isRecording && !transcript && !interimTranscript && (
+                                        <div className="flex gap-2 mb-6 pb-6 border-b border-zinc-800">
+                                            <button
+                                                onClick={() => setInputMode('voice')}
+                                                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
+                                                    inputMode === 'voice'
+                                                        ? 'bg-indigo-500 text-white'
+                                                        : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
+                                                }`}
+                                            >
+                                                <Mic size={18} />
+                                                Voice
+                                            </button>
+                                            <button
+                                                onClick={() => setInputMode('text')}
+                                                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
+                                                    inputMode === 'text'
+                                                        ? 'bg-indigo-500 text-white'
+                                                        : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'
+                                                }`}
+                                            >
+                                                <Type size={18} />
+                                                Type
+                                            </button>
                                         </div>
-                                    ) : (
-                                        <div className="h-full flex flex-col items-center justify-center text-zinc-600 space-y-6 opacity-60">
-                                            <div className="w-20 h-20 rounded-full bg-zinc-800/50 border border-zinc-800 flex items-center justify-center">
-                                                <Mic size={32} />
-                                            </div>
-                                            <div className="text-center space-y-2">
-                                                <p className="text-lg font-medium text-zinc-400">Ready to Answer?</p>
-                                                <p className="text-sm">Click the microphone button below to start recording your response.</p>
+                                    )}
+
+                                    {/* Voice Input Section */}
+                                    {inputMode === 'voice' && (
+                                        <div className="h-full flex flex-col">
+                                            {transcript || interimTranscript ? (
+                                                <div className="space-y-4 animate-in fade-in duration-300">
+                                                    <div className="flex gap-4">
+                                                        <div className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center shrink-0 mt-1">
+                                                            <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></div>
+                                                        </div>
+                                                        <div className="space-y-2 max-w-3xl">
+                                                            <p className="text-lg text-zinc-300 leading-relaxed font-light">
+                                                                {transcript} <span className="text-zinc-500">{interimTranscript}</span>
+                                                            </p>
+                                                            {isRecording && <span className="inline-block w-1.5 h-4 bg-indigo-500 animate-pulse ml-1"></span>}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <div className="h-full flex flex-col items-center justify-center text-zinc-600 space-y-6 opacity-60">
+                                                    <div className="w-20 h-20 rounded-full bg-zinc-800/50 border border-zinc-800 flex items-center justify-center">
+                                                        <Mic size={32} />
+                                                    </div>
+                                                    <div className="text-center space-y-2">
+                                                        <p className="text-lg font-medium text-zinc-400">Ready to Answer?</p>
+                                                        <p className="text-sm">Click the microphone button below to start recording your response.</p>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {/* Text Input Section */}
+                                    {inputMode === 'text' && (
+                                        <div className="h-full flex flex-col">
+                                            <textarea
+                                                value={transcript}
+                                                onChange={(e) => setTranscript(e.target.value)}
+                                                placeholder="Type your answer here... (minimum 10 characters)"
+                                                className="flex-1 w-full bg-zinc-800/50 border border-zinc-700 rounded-xl p-4 text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/50 resize-none text-base leading-relaxed"
+                                            />
+                                            <div className="mt-4 text-xs text-zinc-500">
+                                                Character count: {transcript.length}
                                             </div>
                                         </div>
                                     )}
@@ -413,12 +471,14 @@ const ActiveInterview = () => {
                                         {isRecording && <p className="text-xs text-red-500 font-bold animate-pulse flex items-center gap-2 mb-2"><span className="w-2 h-2 rounded-full bg-red-500"></span> Recording Audio...</p>}
                                     </div>
                                     <div className="flex items-center gap-4">
-                                        <button
-                                            onClick={toggleRecording}
-                                            className={`h-14 w-14 rounded-full flex items-center justify-center transition-all ${isRecording ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/20 scale-100' : 'bg-zinc-100 hover:bg-white text-zinc-900 scale-100'}`}
-                                        >
-                                            {isRecording ? <StopCircle size={28} className="fill-white" /> : <Mic size={28} />}
-                                        </button>
+                                        {inputMode === 'voice' && (
+                                            <button
+                                                onClick={toggleRecording}
+                                                className={`h-14 w-14 rounded-full flex items-center justify-center transition-all ${isRecording ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/20 scale-100' : 'bg-zinc-100 hover:bg-white text-zinc-900 scale-100'}`}
+                                            >
+                                                {isRecording ? <StopCircle size={28} className="fill-white" /> : <Mic size={28} />}
+                                            </button>
+                                        )}
                                         <button
                                             onClick={submitAnswer}
                                             disabled={!transcript || processing || isRecording}

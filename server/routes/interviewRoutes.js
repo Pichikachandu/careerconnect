@@ -29,18 +29,30 @@ async function generateContent(prompt) {
 // POST /api/interview/questions
 router.post('/questions', async (req, res) => {
     try {
-        const { jobRole, techStack, experience } = req.body;
+        const { jobRole, techStack, experience, topic, scenarioBased = false } = req.body;
 
         if (!jobRole || !techStack) {
             return res.status(400).json({ message: "Job Role and Tech Stack are required" });
         }
 
-        const prompt = `
-            Generate 5 technical interview questions for a ${jobRole} role requiring experience in ${techStack}. 
-            The candidate has ${experience} years of experience. 
-            Return ONLY a raw JSON array of strings (e.g. ["Question 1?", "Question 2?"]). 
-            Do not include Markdown formatting or extra text.
-        `;
+        let prompt;
+        if (scenarioBased && topic) {
+            prompt = `
+                Generate 5 scenario-based interview questions for a ${jobRole} role focusing on ${topic}.
+                The candidate has ${experience} years of experience with ${techStack}.
+                Each question should present a realistic work scenario or problem related to ${topic}.
+                Return ONLY a raw JSON array of strings (e.g. ["Scenario 1...?", "Scenario 2...?"]).
+                Do not include Markdown formatting or extra text.
+            `;
+        } else {
+            prompt = `
+                Generate 10 technical interview questions for a ${jobRole} role requiring experience in ${techStack}.
+                The candidate has ${experience} years of experience.
+                Focus on fundamental concepts and practical applications.
+                Return ONLY a raw JSON array of strings (e.g. ["Question 1?", "Question 2?"]).
+                Do not include Markdown formatting or extra text.
+            `;
+        }
 
         const text = await generateContent(prompt);
         // Clean up markdown if AI adds it
